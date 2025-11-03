@@ -103,39 +103,3 @@ export const POST = async (req: Request) => {
     );
   }
 };
-
-//DELETE
-export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
-  try {
-    const { id } = params;
-
-    if (!id) {
-      return NextResponse.json(
-        { success: false, message: "ID parameter is required" },
-        { status: 400 }
-      );
-    }
-
-    // ✅ Try deleting the record
-    const deleted = await About.findByIdAndDelete(id);
-
-    // ✅ If no document found with that ID
-    if (!deleted) {
-      return NextResponse.json(
-        { success: false, message: "No About record found with this ID" },
-        { status: 404 } // ❌ Not Found
-      );
-    }
-
-    return NextResponse.json(
-      { success: true, message: "About record deleted successfully" },
-      { status: 200 } // ✅ OK
-    );
-  } catch (error: any) {
-    console.error("❌ Error deleting About record:", error);
-    return NextResponse.json(
-      { success: false, message: "Server error while deleting record" },
-      { status: 500 } // ❌ Internal Server Error
-    );
-  }
-};
