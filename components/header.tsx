@@ -32,7 +32,7 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // run once at start
+    handleScroll(); 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -51,7 +51,7 @@ const Header = () => {
       <nav
         className={`fixed bottom-4 left-1/2 -translate-x-1/2
           w-[92%] sm:w-[500px] md:w-[700px]
-          flex items-center justify-around rounded-full
+          flex items-start md:items-center justify-around rounded-full
           px-2 py-1 z-50 transition-all duration-500
           backdrop-blur-md border border-border/30
           ${scrolled ? "bg-(--background-color)/70 shadow-lg" : "bg-transparent"}
@@ -65,22 +65,20 @@ const Header = () => {
             <Link
               key={href}
               href={href}
-              className={`flex flex-col md:flex-row items-center gap-1 font-semibold px-6 py-3 rounded-full transition-all duration-300
+              className={`flex flex-col md:flex-row items-center gap-1 font-semibold  text-[20px] md:px-6 py-3 px-5 md:py-3 rounded-full transition-all duration-300
                 ${
                   isActive
-                
                     ? "bg-(--primary) text-(--background-color)"
                     : "text-(--text-color)"  
                 }
               `}
             >
-              <span className="text-xl">{icon}</span>
+              <span className="md:text-xl text-lg">{icon}</span>
               <span className="hidden md:inline text-sm">{label}</span>
             </Link>
           );
         })}
 
-        <ThemeToggle />
       </nav>
     </section>
   );
